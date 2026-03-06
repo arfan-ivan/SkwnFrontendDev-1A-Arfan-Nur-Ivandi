@@ -1,5 +1,7 @@
 # SkwnFrontendDev-1A-Arfan-Nur-Ivandi
 
+Alamat Github: https://github.com/arfan-ivan/SkwnFrontendDev-1A-Arfan-Nur-Ivandi
+
 ## Teknologi yang Digunakan
 
 - **HTML5** — Struktur halaman
