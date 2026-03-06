@@ -1,133 +1,147 @@
-$(document).ready(function(){
+document.querySelectorAll('.dropdown').forEach(function(dd) {
+    dd.addEventListener('mouseenter', function() {
+        this.querySelector('.dropdown-menu').style.display = 'block';
+    });
+    dd.addEventListener('mouseleave', function() {
+        this.querySelector('.dropdown-menu').style.display = 'none';
+    });
+});
 
-  $(".dropdown").on("mouseenter", function(){
-    $(this).find(".dropdown-menu").stop(true, true).slideDown(200);
-  }).on("mouseleave", function(){
-    $(this).find(".dropdown-menu").stop(true, true).slideUp(200);
-  });
-  $(".dropdown > a").on("click", function(e){
-    var $menu = $(this).siblings(".dropdown-menu");
-    if ($menu.is(":hidden")) {
-      e.preventDefault();
-      $(".dropdown-menu").not($menu).slideUp(200);
-      $menu.stop(true, true).slideDown(200);
-    }
-  });
-  $(document).on("click", function(e){
-    if (!$(e.target).closest(".dropdown").length) {
-      $(".dropdown-menu").slideUp(200);
-    }
-  });
+var overlay   = document.getElementById('mobileOverlay');
+var menu      = document.getElementById('mobileMenu');
+var openBtn   = document.getElementById('burgerBtn');
+var closeBtn  = document.getElementById('closeBtn');
+var furToggle = document.getElementById('mmFurnitureToggle');
+var furSub    = document.getElementById('mmFurnitureSub');
 
-  var items = [
-    { img: 'img/slider/1.jpg', name: 'Und Chair',  price: '$329' },
-    { img: 'img/slider/2.jpg', name: 'Pösht Sofa', price: '$549' },
-    { img: 'img/slider/3.jpg', name: 'Nörd Table', price: '$219' },
-    { img: 'img/slider/4.jpg', name: 'Wäll Shelf', price: '$189' },
-    { img: 'img/slider/5.jpg', name: 'Grön Couch', price: '$499' },
-  ];
-
-  var SMALL       = 160;
-  var ACTIVE      = 280;
-  var GAP         = 12;
-  var EXTRA       = 5;
-  var DURATION    = 400;
-  var current     = 0;
-  var total       = items.length;
-  var isAnimating = false;
-
-  function getIdx(offset) {
-    return ((current + offset) % total + total) % total;
-  }
-
-  function createSlide(idx, isActive) {
-    var item = items[idx];
-    return $(
-      '<div class="slide-item' + (isActive ? ' active' : '') + '">' +
-        '<img src="' + item.img + '" alt="' + item.name + '">' +
-        '<div class="slide-info">' +
-          '<span class="slide-price">' + item.price + '</span>' +
-          '<span class="slide-name">'  + item.name  + '</span>' +
-        '</div>' +
-      '</div>'
-    );
-  }
-
-function calcInitialX() {
-    var wrapperWidth = window.innerWidth;
-    var leftOfCenter = EXTRA * (SMALL + GAP) + ACTIVE / 1;
-    var center = Math.round(wrapperWidth / 5 - leftOfCenter);
-    return center + (SMALL + GAP);
+function openMenu() {
+    menu.classList.add('is-open');
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+    menu.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
 }
 
-  function getCurrentX($track) {
-    var mat = window.getComputedStyle($track[0]).transform;
-    if (!mat || mat === 'none') return calcInitialX();
-    var parts = mat.match(/matrix.*\((.+)\)/);
-    if (!parts) return calcInitialX();
-    return parseFloat(parts[1].split(', ')[4]) || calcInitialX();
-  }
+openBtn.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
 
-  function buildTrack() {
-    var $track     = $('#sliderTrack');
-    var savedScroll = window.scrollY;
-    $track.css({ transition: 'none', transform: 'translateX(' + calcInitialX() + 'px)' });
-    $track.empty();
-    for (var i = -EXTRA; i <= EXTRA; i++) {
-      $track.append(createSlide(getIdx(i), i === 0));
-    }
-    window.scrollTo(0, savedScroll);
-  }
-
-  function slide(direction) {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    var $track   = $('#sliderTrack');
-    var step     = SMALL + GAP;
-    var currentX = getCurrentX($track);
-
-    if (direction === 'next') {
-      $track.append(createSlide(getIdx(EXTRA + 1), false));
-      $track[0].getBoundingClientRect();
-      $track.css({
-        transition: 'transform ' + DURATION + 'ms cubic-bezier(0.4, 0, 0.2, 1)',
-        transform:  'translateX(' + (currentX - step) + 'px)'
-      });
-      setTimeout(function() {
-        $track.find('.slide-item').removeClass('active');
-        $track.find('.slide-item').eq(EXTRA + 1).addClass('active');
-      }, 30);
-
+furToggle.addEventListener('click', function() {
+    var parent = this.parentElement;
+    if (parent.classList.contains('mm-sub-open')) {
+        parent.classList.remove('mm-sub-open');
     } else {
-      $track.prepend(createSlide(getIdx(-(EXTRA + 1)), false));
-      $track.css({ transition: 'none', transform: 'translateX(' + (currentX - step) + 'px)' });
-      $track[0].getBoundingClientRect();
-      $track.css({
-        transition: 'transform ' + DURATION + 'ms cubic-bezier(0.4, 0, 0.2, 1)',
-        transform:  'translateX(' + currentX + 'px)'
-      });
-      setTimeout(function() {
-        $track.find('.slide-item').removeClass('active');
-        $track.find('.slide-item').eq(EXTRA).addClass('active');
-      }, 30);
+        parent.classList.add('mm-sub-open');
+    }
+});
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) closeMenu();
+});
+
+(function() {
+    var items = [
+        { img: 'img/slider/1.jpg', name: 'Und Chair',  price: '$329' },
+        { img: 'img/slider/2.jpg', name: 'Pösht Sofa', price: '$549' },
+        { img: 'img/slider/3.jpg', name: 'Nörd Table', price: '$219' },
+        { img: 'img/slider/4.jpg', name: 'Wäll Shelf', price: '$189' },
+        { img: 'img/slider/5.jpg', name: 'Grön Couch', price: '$499' },
+        { img: 'img/slider/6.jpg', name: 'Lüft Chair', price: '$399' },
+        { img: 'img/slider/7.jpg', name: 'Bäck Rack',  price: '$149' },
+    ];
+
+    var SMALL = 160, ACTIVE = 280, GAP = 12, EXTRA = 5, DURATION = 400;
+    var current = 0, total = items.length, isAnimating = false;
+
+    function getIdx(offset) {
+        return ((current + offset) % total + total) % total;
     }
 
-    setTimeout(function() {
-      current     = direction === 'next' ? getIdx(1) : getIdx(-1);
-      isAnimating = false;
-      buildTrack();
-    }, DURATION + 30);
-  }
+    function createSlide(idx, isActive) {
+        var item = items[idx];
+        var div = document.createElement('div');
+        div.className = 'slide-item' + (isActive ? ' active' : '');
+        div.innerHTML =
+            '<img src="' + item.img + '" alt="' + item.name + '" style="width:100%;height:100%;object-fit:cover">' +
+            '<div class="slide-info">' +
+                '<span class="slide-price">' + item.price + '</span>' +
+                '<span class="slide-name">' + item.name + '</span>' +
+            '</div>';
+        return div;
+    }
 
-  $('#nextBtn').on('click', function() { slide('next'); });
-  $('#prevBtn').on('click', function() { slide('prev'); });
+    function calcInitialX() {
+        var w = window.innerWidth;
+        var leftOfCenter = EXTRA * (SMALL + GAP) + ACTIVE;
+        return Math.round(w / 5 - leftOfCenter) + (SMALL + GAP);
+    }
 
-  var resizeTimer;
-  $(window).on('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(buildTrack, 150);
-  });
+    function getCurrentX(track) {
+        var mat = window.getComputedStyle(track).transform;
+        if (!mat || mat === 'none') return calcInitialX();
+        var parts = mat.match(/matrix.*\((.+)\)/);
+        return parts ? (parseFloat(parts[1].split(', ')[4]) || calcInitialX()) : calcInitialX();
+    }
 
-  buildTrack();
-});
+    function buildTrack() {
+        var track = document.getElementById('sliderTrack');
+        var sy = window.scrollY;
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(' + calcInitialX() + 'px)';
+        track.innerHTML = '';
+        for (var i = -EXTRA; i <= EXTRA; i++) {
+            track.appendChild(createSlide(getIdx(i), i === 0));
+        }
+        window.scrollTo(0, sy);
+    }
+
+    function slide(dir) {
+        if (isAnimating) return;
+        isAnimating = true;
+        var track = document.getElementById('sliderTrack');
+        var step = SMALL + GAP;
+        var cx = getCurrentX(track);
+
+        if (dir === 'next') {
+            track.appendChild(createSlide(getIdx(EXTRA + 1), false));
+            track.getBoundingClientRect();
+            track.style.transition = 'transform ' + DURATION + 'ms cubic-bezier(0.4,0,0.2,1)';
+            track.style.transform = 'translateX(' + (cx - step) + 'px)';
+            setTimeout(function() {
+                track.querySelectorAll('.slide-item').forEach(function(s) { s.classList.remove('active'); });
+                track.querySelectorAll('.slide-item')[EXTRA + 1].classList.add('active');
+            }, 30);
+        } else {
+            track.insertBefore(createSlide(getIdx(-(EXTRA + 1)), false), track.firstChild);
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(' + (cx - step) + 'px)';
+            track.getBoundingClientRect();
+            track.style.transition = 'transform ' + DURATION + 'ms cubic-bezier(0.4,0,0.2,1)';
+            track.style.transform = 'translateX(' + cx + 'px)';
+            setTimeout(function() {
+                track.querySelectorAll('.slide-item').forEach(function(s) { s.classList.remove('active'); });
+                track.querySelectorAll('.slide-item')[EXTRA].classList.add('active');
+            }, 30);
+        }
+
+        setTimeout(function() {
+            current = dir === 'next' ? getIdx(1) : getIdx(-1);
+            isAnimating = false;
+            buildTrack();
+        }, DURATION + 30);
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', function() { slide('next'); });
+    document.getElementById('prevBtn').addEventListener('click', function() { slide('prev'); });
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(buildTrack, 150);
+    });
+
+    buildTrack();
+})();

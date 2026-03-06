@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SkwnFrontendDev-Arfan-Nur-Ivandi</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dekoor</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.3.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 
@@ -17,42 +16,72 @@
     </div>
     <h1>Dekoor</h1>
     <nav class="navbar">
-    <ul>
-        <li><a href="">About us</a></li>
-        <li class="dropdown">
-            Furniture <i class="fi fi-rr-angle-small-down"></i>
-
-            <ul class="dropdown-menu">
-                <li><a href="">Affiliate</a></li>
-                <li><a href="">Reseller</a></li>
-                <li><a href="">Investors</a></li>
-            </ul>
-        </li>
-        <li><a href="">Partnerships</a></li>
-        <li><a href="">Contact</a></li>
-    </ul>
+        <ul>
+            <li><a href="">About us</a></li>
+            <li class="dropdown">
+                Furniture <i class="fi fi-rr-angle-small-down"></i>
+                <ul class="dropdown-menu">
+                    <li><a href="">Affiliate</a></li>
+                    <li><a href="">Reseller</a></li>
+                    <li><a href="">Investors</a></li>
+                </ul>
+            </li>
+            <li><a href="">Partnerships</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
     </nav>
-    <div class="SignUp">
-    <a href="#" class="btn">Sign Up</a>
-    </div>
-
-    <div class="tas-belanja">
-       <i class="fi fi-rr-shopping-bag"></i>
+    <div class="header-right">
+        <div class="SignUp"><a href="#">Sign Up</a></div>
+        <div class="tas-belanja1"><i class="fi fi-rr-shopping-bag"></i></div>
+        <button class="burger-btn" id="burgerBtn" aria-label="Buka menu">
+            <img src="img/menu.png" alt="menu" class="burger-icon">
+        </button>
     </div>
 </header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mm-header">
+        <div class="mm-logo">
+            <div class="logo-container" style="width:44px;height:38px;margin:0">
+                <div class="logo1" style="width:30px;height:30px"></div>
+                <div class="logo2" style="width:30px;height:30px;bottom:14px;left:11px"></div>
+            </div>
+            <span>Dekoor</span>
+        </div>
+        <button class="mm-close" id="closeBtn">&#10005;</button>
+    </div>
+    <nav class="mm-nav">
+        <ul>
+            <li><a href="">About us</a></li>
+            <li>
+                <div class="mm-toggle" id="mmFurnitureToggle">
+                    Furniture <i class="fi fi-rr-angle-small-down"></i>
+                </div>
+                <ul class="mm-submenu" id="mmFurnitureSub">
+                    <li><a href="">Affiliate</a></li>
+                    <li><a href="">Reseller</a></li>
+                    <li><a href="">Investors</a></li>
+                </ul>
+            </li>
+            <li><a href="">Partnerships</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="mm-footer">
+        <a href="#" class="mm-signup">Sign Up</a>
+        <div class="tas-belanja"><i class="fi fi-rr-shopping-bag"></i></div>
+    </div>
+</div>
 
 <section class="hero">
     <div class="hero-text">
         <h2>The kind of <span>furniture</span> you have been looking for</h2>
         <div class="hero-buttons">
-            <a href="#" class="btn-catalog">
-                <i class="fi fi-rr-search"></i>
-                SEARCH CATALOG
-            </a>
+            <a href="#" class="btn-catalog"><i class="fi fi-rr-search"></i> SEARCH CATALOG</a>
             <a href="#" class="btn-video">
-                <div class="play-icon">
-                    <i class="fi fi-rr-play"></i>
-                </div>
+                <div class="play-icon"><i class="fi fi-rr-play"></i></div>
                 WATCH VIDEO
             </a>
         </div>
@@ -109,19 +138,13 @@
         <p class="section-tag">Categories</p>
         <h2>Furniture Sets Recommendations</h2>
         <div class="category-list">
-            <div class="category-item">
-                <h4>Bedroom</h4>
-            </div>
+            <div class="category-item"><h4>Bedroom</h4></div>
             <div class="category-item active">
                 <h4>Living Room</h4>
                 <p>Enjoy a great living room aesthetics with your family. Designs created for increased comfortability</p>
             </div>
-            <div class="category-item">
-                <h4>Home Office</h4>
-            </div>
-            <div class="category-item">
-                <h4>Gaming Room</h4>
-            </div>
+            <div class="category-item"><h4>Home Office</h4></div>
+            <div class="category-item"><h4>Gaming Room</h4></div>
         </div>
     </div>
 </section>
@@ -136,17 +159,15 @@
             <button class="btn-seemore">SEE MORE</button>
         </div>
     </div>
-
     <div class="slider-wrapper">
-    <div class="slider-track" id="sliderTrack"></div>
-</div>
-
-<div class="bestseller-header-right">
-            <div class="slider-nav">
-                <button id="prevBtn"><i class="fi fi-rr-angle-left"></i></button>
-                <button id="nextBtn"><i class="fi fi-rr-angle-right"></i></button>
-            </div>
-</div>
+        <div class="slider-track" id="sliderTrack"></div>
+    </div>
+    <div class="bestseller-header-right">
+        <div class="slider-nav">
+            <button id="prevBtn"><i class="fi fi-rr-angle-left"></i></button>
+            <button id="nextBtn"><i class="fi fi-rr-angle-right"></i></button>
+        </div>
+    </div>
 </section>
 
 <section class="deals-section">
@@ -163,21 +184,20 @@
         <div class="footer-brand">
             <div class="footer-logo">
                 <div class="iconlogo">
-                <div class="logo-icon1"></div>
-                <div class="logo-icon2"></div>
+                    <div class="logo-icon1"></div>
+                    <div class="logo-icon2"></div>
                 </div>
                 <span>Dekoor</span>
             </div>
-            <p>Dekoor is a furniture company created to fulfill the needs of family with aesthetic feeling in their furniture. Always pay attention to details and give clear communication for the customers. Priority of our design is comfortability.</p>
+            <p>Dekoor is a furniture company created to fulfill the needs of family with aesthetic feeling in their furniture. Always pay attention to details and give clear communication for the customers.</p>
             <p class="footer-copyright">©Copyright 2022 Dekoor</p>
         </div>
-
         <div class="footer-links">
             <div class="footer-col">
                 <h4>Support</h4>
                 <ul>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Shipping &amp; Returns</a></li>
                     <li><a href="#">Care guide</a></li>
                     <li><a href="#">Redeem warranty</a></li>
                 </ul>
@@ -204,7 +224,7 @@
     </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
