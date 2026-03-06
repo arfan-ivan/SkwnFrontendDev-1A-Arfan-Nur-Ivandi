@@ -209,7 +209,7 @@ $(function () {
             return;
         }
         $(this).closest('.email-wrapper').html(
-            '<p style="color:#2ecc71;font-weight:600;">🎉 You\'re in! Check your inbox for your 10% off code.</p>'
+            '<p style="color:#2ecc71;font-weight:600;"> You\'re in! Check your inbox for your 10% off code.</p>'
         );
     });
 
