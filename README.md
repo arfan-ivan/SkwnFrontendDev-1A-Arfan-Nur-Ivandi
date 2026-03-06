@@ -47,6 +47,6 @@ Semua dependensi dimuat melalui CDN sehingga tidak diperlukan instalasi apapun.
 ---
 
 ## Screenshots
-![Preview](img/Screenshot 2026-03-07 at 04-41-51 Dekoor.png)
+![Preview](img/preview.png)
 
 ---
