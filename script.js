@@ -212,5 +212,4 @@ $(function () {
             '<p style="color:#2ecc71;font-weight:600;"> You\'re in! Check your inbox for your 10% off code.</p>'
         );
     });
-
 });
